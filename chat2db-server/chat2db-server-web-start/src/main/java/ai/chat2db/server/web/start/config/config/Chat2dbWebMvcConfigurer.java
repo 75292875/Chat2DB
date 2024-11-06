@@ -55,7 +55,7 @@ public class Chat2dbWebMvcConfigurer implements WebMvcConfigurer {
     /**
      * Globally released url
      */
-    private static final String[] FRONT_PERMIT_ALL = new String[] {"/favicon.ico", "/error", "/static/**",
+    private static final String[] FRONT_PERMIT_ALL = new String[] {"/","/favicon.ico", "/error", "/static/**",
         "/api/system", "/login", "/api/system/get_latest_version"};
 
     @Resource
@@ -144,12 +144,14 @@ public class Chat2dbWebMvcConfigurer implements WebMvcConfigurer {
 //                        if(path.startsWith("/login")){
 //                            return true;
 //                        }
+
                         if (path.startsWith(API_PREFIX)) {
                             response.getWriter().println(JSON.toJSONString(
                                 ActionResult.fail("common.needLoggedIn", I18nUtils.getMessage("common.needLoggedIn"),
                                     "")));
                             return false;
                         } else {
+                            log.info("path:"+path);
                             throw new RedirectBusinessException(
                                 "/login?callback=" + SaFoxUtil.joinParam(request.getRequestURI(),
                                     request.getQueryString()));

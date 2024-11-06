@@ -10,7 +10,7 @@
 /dist
 .swc
 ./yarn-error.log
-
+./dist/
 
 /release
 /static
